@@ -1,0 +1,170 @@
+<!-- BEN YOUNES IHAB -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<title>ESP-12</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="config.css">
+</head>
+<body>
+
+
+<header>
+  <h3>ESP-12</h3>
+
+</header>
+
+<section>
+  <div class="topnav" id="myTopnav"> 
+    <a style="width: 8%;" href="home.html">Accueil</a>
+    <div class="dropdown">
+        <button class="dropbtn">Configuration 
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="configwifi.html" >Configuration WIFI </a>
+          <a href="config.html" >Configuration réseaux </a>
+        </div>
+    </div> 
+        <a class="active" href="configcompte.html">Paramètres du compte</a> 
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+  </div >
+
+  <article>
+    <h2>Configuration réseau</h2>
+    <hr class="hr2">
+    <div class="configipsquare">
+	 <form method='get' action='ipcapteur'>
+      <br>
+			<div>
+      <input type="radio" class="demo5" name="demo5" id="dhcp" value="1" onchange="paymentMethodChange()"  >
+       <label for="dhcp">Automatique ( DHCP )</label></br>
+       <br>
+			<input type="radio" class="demo5" name="demo5" id="static" value="0" onchange="paymentMethodChange()" checked="checked">
+       <label for="static">Statique</label>
+       </div>
+      
+
+<fieldset id="chkdd" >
+
+
+        <div class="material-textfield">
+          <input class="input" type="text" placeholder=" " id="ip" value="" name="ip" maxlength="30"   required>
+          <label id="l1" class="labeldesign">Adresse IP</label>
+        </div>
+        <div class="material-textfield">
+          <input class="input" type="text" placeholder=" " id="dns" value="" name="dns" maxlength="30" required>
+          <label id="l2" class="labeldesign">DNS</label>
+        </div>
+        <div class="material-textfield">
+          <input class="input" type="text" placeholder=" " id="gateway" value="" name="gateway" maxlength="30" required>
+          <label class="labeldesign" id="l3" >Passerelle</label>
+        </div>
+        <div class="material-textfield">
+          <input class="input" type="text" placeholder=" " id="subnet" value="" name="subnet" maxlength="30" required>
+          <label class="labeldesign" id="l4">Masque</label>
+        </div>
+		</fieldset>
+    <p>
+      <span style="color: red;" id="error"></span>
+    </p> 
+     <input class="button" type='submit' value="Valider"></form>
+     
+    </div>
+    
+  </article>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+    function paymentMethodChange() {
+	 
+                if (document.getElementById("dhcp").checked== "1"){
+                    var labels = document.getElementsByClassName("labeldesign"); 
+					var cells = document.getElementsByClassName("input");
+                    for (var i = 0; i < cells.length; i++) { 
+                        cells[i].disabled = true;	
+						labels[i].style.backgroundColor = "#ccc";
+                    }
+					
+                }     
+                else{
+				 var labels = document.getElementsByClassName("labeldesign");
+                    var cells = document.getElementsByClassName("input"); 
+                    for (var i = 0; i < cells.length; i++) { 
+                        cells[i].disabled = false;
+						labels[i].style.backgroundColor = "white";
+                    }
+                }        
+            }
+    setInterval(function ( ) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("error").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/error", true);
+    xhttp.send();
+    }, 10 ) ;
+for(let i =0 ;i<4;i++){
+    if (i==0){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("ip").value = this.responseText;
+        }
+      };
+      xhttp.open("GET", "/ip", true);
+      xhttp.send();
+    }
+    else if (i==1){
+var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("dns").value = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/dns", true);
+    xhttp.send();
+  }
+  else if (i==2){
+var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("subnet").value = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/subnet", true);
+    xhttp.send();
+  }
+  else{
+  var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("gateway").value = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/gateway", true);
+    xhttp.send();
+  }
+}
+  </script>
+</section>
+
+<footer>
+  <p class="pfooter"> Projet boulangerie connectée © 2020/2021 </p>
+</footer>
+
+</body>
+</html>
+
+

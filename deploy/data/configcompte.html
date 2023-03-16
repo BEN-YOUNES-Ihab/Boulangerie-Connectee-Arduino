@@ -1,0 +1,96 @@
+<!-- BEN YOUNES IHAB -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<title>ESP-12</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="config.css">
+</head>
+<body>
+
+
+<header>
+  <h3>ESP-12</h3>
+
+</header>
+
+<section>
+  <div class="topnav" id="myTopnav"> 
+    <a style="width: 8%;" href="home.html">Accueil</a>
+    <div class="dropdown">
+        <button class="dropbtn">Configuration 
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="configwifi.html" >Configuration WIFI </a>
+          <a href="config.html" >Configuration réseaux </a> 
+        </div>
+    </div> 
+        <a class="active" href="configcompte.html">Paramètres du compte</a> 
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+  </div >
+  <article>
+    <h2>Paramètres du compte</h2>
+    <hr class="hr2">
+    <div class="configcomptesquare">
+        <p>Modifier le nom d'utilisateur</p>
+        <div class="material-textfield">
+          <form method='get' action='compteuser'>
+            <input class="input" placeholder=" " type="text" maxlength="32" name="user" required>
+            <label class="labeldesign">Nom d'utilisateur</label>
+        </div>
+        
+        <input class="button" type='submit' value="Enregistrer les modifications"></form>
+        <p>Modifier le mot de passe</p>
+        <div  class="material-textfield">
+          <form method='get' action='comptepass'>
+            <input class="input" type="password" placeholder=" " maxlength="32" name="currentpass" required>
+            <label class="labeldesign">Actuel</label>
+        </div>
+        <div  class="material-textfield">
+          <input class="input" type="password" placeholder=" " maxlength="32" name="newpass" required>
+          <label class="labeldesign">Nouveau</label>
+      </div>
+      <div  class="material-textfield">
+        <input class="input" type="password" placeholder=" " maxlength="32" name="confirmpass" required>
+        <label class="labeldesign">Confirmer</label>
+    </div>
+
+    <input class="button" type='submit' value="Valider"></form> 
+	    <p>
+      <span style="color: red;" id="error"></span>
+    </p> 
+    </div>
+  </article>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+  setInterval(function ( ) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("error").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/error", true);
+    xhttp.send();
+  }, 10 ) ;
+
+  </script>
+</section>
+
+<footer>
+  <p class="pfooter">Projet boulangerie connectée © 2020/2021</p>
+</footer>
+
+</body>
+</html>

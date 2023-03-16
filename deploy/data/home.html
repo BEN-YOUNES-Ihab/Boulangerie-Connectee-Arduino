@@ -1,0 +1,195 @@
+<!-- BEN YOUNES IHAB -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<title>ESP-12</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="config.css">
+</head>
+<body>
+<header>
+  <h3>ESP-12</h3>
+</header>
+<section>
+  <div class="topnav" id="myTopnav"> 
+    <a style="width: 8%;" href="home.html">Accueil</a>
+    <div class="dropdown">
+        <button class="dropbtn">Configuration 
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="configwifi.html" >Configuration WIFI </a>
+          <a href="config.html" >Configuration réseaux </a>
+        </div>
+    </div> 
+        <a class="active" href="configcompte.html">Paramètres du compte</a> 
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+  </div >
+  <article>
+
+    <h1>Informations WIFI</h1>
+
+    <div class="homesquare">
+    	<p>
+          <span >SSID : </span>
+          <span style="font-weight: bold;" id="ssid"></span>
+        </p>
+     	<p>
+          <span >Mot de passe : </span>
+          <span style="font-weight: bold;" id="pass"></span>
+        </p>
+	  </div>
+
+    <hr>
+    <h1>Informations réseau</h1>
+
+    <div class="homesquare">
+      <p>
+        <span >Mode : </span>
+        <span style="font-weight: bold;" id="mode"></span>
+      </p>
+      <p>
+        <span >Adresse IP : </span>
+        <span style="font-weight: bold;" id="ipw"></span>
+      </p>
+      <p>
+        <span >Passerelle : </span>
+        <span  style="font-weight: bold;" id="gatw"></span>
+      </p>
+      <p>
+        <span >Masque : </span>
+        <span style="font-weight: bold;" id="subw"></span>
+      </p>
+      <p>
+        <span >Adresse MAC : </span>
+        <span style="font-weight: bold;" id="macw"></span>
+      </p>
+    </div>
+   
+
+    
+    <hr>
+    <h1>État du relais</h1>
+
+    <div class="homesquare">
+      <p>
+        <span >État du relais : </span>
+        <span style="font-weight: bold;" id="state"></span>
+		<br>
+        <span >Changer l'état du relais : </span>
+      </p>
+      <p>
+        <form get="get" action="/onoff">
+          <button value="1" name="relay" class="Btn">ON</button>
+          <button value="0" name="relay" class="Btn BtnOff">OFF</button>
+        </form>
+      </p>
+    </div>
+
+  
+  </article>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+
+    setInterval(function ( ) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("ipw").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/ipw", true);
+    xhttp.send();
+  }, 10 ) ;
+
+    setInterval(function ( ) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("gatw").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/gatw", true);
+    xhttp.send();
+  }, 10 ) ;
+    setInterval(function ( ) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("subw").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/subw", true);
+    xhttp.send();
+  }, 10 ) ;
+    setInterval(function ( ) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("macw").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/macw", true);
+    xhttp.send();
+  }, 10 ) ;
+
+
+    setInterval(function ( ) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("ssid").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/ssid", true);
+    xhttp.send();
+  }, 10 ) ;
+
+    setInterval(function ( ) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("pass").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/pass", true);
+    xhttp.send();
+  }, 10 ) ;
+
+    setInterval(function ( ) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("ipserv").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/state", true);
+    xhttp.send();
+  }, 10 ) ;
+  setInterval(function ( ) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("mode").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "/mode", true);
+    xhttp.send();
+  }, 10 ) ;
+  </script>
+</section>
+<footer>
+  <p class="pfooter">Projet boulangerie connectée © 2020/2021</p>
+</footer>
+</body>
+</html>
